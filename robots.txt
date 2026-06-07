@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+Disallow: /login
+Disallow: /api/
+
 Sitemap: https://edencore-net.work/sitemap.xml

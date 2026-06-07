@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Политика конфиденциальности — EdenCore VPN</title>
+  <meta name="description" content="Политика конфиденциальности EdenCore VPN. Мы не записываем и не храним логи активности пользователей. Узнайте, как мы защищаем ваши данные.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://edencore-net.work/privacy">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="EdenCore VPN">
+  <meta property="og:url" content="https://edencore-net.work/privacy">
+  <meta property="og:title" content="Политика конфиденциальности — EdenCore VPN">
+  <meta property="og:description" content="Политика конфиденциальности EdenCore VPN. Мы не записываем и не храним логи активности пользователей.">
+
+  <meta name="theme-color" content="#00a865">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green: #00a865;
+      --green-dim: rgba(0,168,101,0.1);
+      --green-border: rgba(0,168,101,0.2);
+      --bg: #f7f8fa;
+      --surface: #ffffff;
+      --surface-2: #f0f2f6;
+      --border: rgba(0,0,0,0.08);
+      --border-hi: rgba(0,0,0,0.14);
+      --text: #0f1117;
+      --text-mid: rgba(15,17,23,0.62);
+      --text-muted: rgba(15,17,23,0.4);
+      --radius-card: 18px;
+      --radius-btn: 100px;
+      --nav-h: 64px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 45% at 15% 8%, rgba(0,168,101,0.06) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 38% at 85% 78%, rgba(0,102,221,0.05) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(22px) saturate(160%);
+      -webkit-backdrop-filter: blur(22px) saturate(160%);
+      background: rgba(247,248,250,0.88);
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .nav-logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 19px;
+      font-weight: 800;
+      text-decoration: none;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo .accent { color: #00a865; }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: color 0.18s;
+    }
+
+    .nav-back:hover { color: var(--text); }
+
+    /* MAIN CONTENT */
+    .page-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 28px 100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: var(--green-dim);
+      border: 1px solid var(--green-border);
+      border-radius: 100px;
+      padding: 4px 12px;
+      margin-bottom: 20px;
+    }
+
+    .page-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .page-date {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+    }
+
+    .doc-body {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 48px 52px;
+    }
+
+    @media (max-width: 600px) {
+      .doc-body { padding: 28px 24px; }
+    }
+
+    .doc-body h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 36px 0 12px;
+      color: var(--text);
+    }
+
+    .doc-body h2:first-child { margin-top: 0; }
+
+    .doc-body p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-mid);
+      margin-bottom: 14px;
+    }
+
+    .doc-body ul {
+      margin: 8px 0 14px 20px;
+      color: var(--text-mid);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .doc-body ul li { margin-bottom: 6px; }
+
+    .doc-body a {
+      color: var(--green);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .doc-body strong { color: var(--text); font-weight: 600; }
+
+    .highlight-box {
+      background: var(--green-dim);
+      border: 1px solid var(--green-border);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin: 20px 0;
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      text-decoration: none;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .footer-logo .accent { color: var(--green); }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-muted);
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <nav class="site-nav" aria-label="Основная навигация">
+    <a href="/" class="nav-logo" aria-label="EdenCore VPN — главная">Eden<span class="accent">Core</span> VPN</a>
+    <a href="/" class="nav-back" aria-label="Вернуться на главную">
+      ← На главную
+    </a>
+  </nav>
+</header>
+
+<main>
+  <div class="page-wrap">
+    <span class="page-label">Документ</span>
+    <h1 class="page-title">Политика конфиденциальности</h1>
+    <p class="page-date">Последнее обновление: 7 июня 2026 г.</p>
+
+    <div class="doc-body">
+
+      <div class="highlight-box">
+        🔒 <strong>Кратко:</strong> EdenCore VPN не записывает, не хранит и не передаёт третьим лицам никаких данных о вашей активности в интернете. No-Log — это не маркетинг, это техническая реальность нашей инфраструктуры.
+      </div>
+
+      <h2>1. Общие положения</h2>
+      <p>Настоящая Политика конфиденциальности описывает, какие данные собирает и обрабатывает сервис EdenCore VPN (далее — «Сервис», «мы»), доступный по адресу <a href="https://edencore-net.work">edencore-net.work</a>, и как мы их используем.</p>
+      <p>Используя наш Сервис, вы соглашаетесь с условиями данной политики. Если вы не согласны с её положениями, пожалуйста, прекратите использование Сервиса.</p>
+
+      <h2>2. Политика No-Log</h2>
+      <p>EdenCore VPN придерживается строгой политики No-Log. Это означает, что мы <strong>не собираем, не записываем и не храним</strong> следующие данные:</p>
+      <ul>
+        <li>Историю посещённых сайтов и DNS-запросы</li>
+        <li>IP-адреса пользователей (исходящие и назначения)</li>
+        <li>Метаданные интернет-сессий (время подключения, объём трафика)</li>
+        <li>Содержимое передаваемых данных</li>
+        <li>Информацию об используемых приложениях и протоколах</li>
+      </ul>
+      <p>Отсутствие логов обеспечивается на архитектурном уровне: серверы не имеют технической возможности записывать трафик пользователей.</p>
+
+      <h2>3. Данные, которые мы собираем</h2>
+      <p>Для обеспечения работы Сервиса мы можем собирать минимально необходимые данные:</p>
+      <ul>
+        <li><strong>Адрес электронной почты</strong> — для регистрации аккаунта и коммуникации</li>
+        <li><strong>Данные об оплате</strong> — обрабатываются платёжными провайдерами, мы не храним данные карт</li>
+        <li><strong>Агрегированная статистика</strong> — общая нагрузка на серверы без привязки к пользователям</li>
+      </ul>
+
+      <h2>4. Использование файлов Cookie</h2>
+      <p>Наш лендинг использует только технически необходимые cookies для корректной работы сайта. Мы не используем отслеживающие или рекламные cookies.</p>
+
+      <h2>5. Передача данных третьим лицам</h2>
+      <p>Мы не продаём, не сдаём в аренду и не передаём ваши персональные данные третьим лицам, за исключением случаев, прямо предусмотренных законодательством.</p>
+
+      <h2>6. Безопасность данных</h2>
+      <p>Все данные передаются по защищённым каналам (HTTPS/TLS). Доступ к данным аккаунтов имеет строго ограниченный круг лиц. Мы регулярно проводим аудит безопасности инфраструктуры.</p>
+
+      <h2>7. Ваши права</h2>
+      <p>Вы вправе в любой момент:</p>
+      <ul>
+        <li>Запросить удаление вашего аккаунта и связанных данных</li>
+        <li>Получить информацию о хранимых данных</li>
+        <li>Отозвать согласие на обработку данных</li>
+      </ul>
+      <p>Для реализации прав обратитесь к нам через <a href="https://t.me/edencorevpn" rel="noopener noreferrer" target="_blank">Telegram</a> или страницу <a href="/contacts">Контакты</a>.</p>
+
+      <h2>8. Изменения политики</h2>
+      <p>Мы оставляем за собой право обновлять данную политику. При существенных изменениях мы уведомим пользователей по email. Актуальная версия всегда доступна на этой странице.</p>
+
+      <h2>9. Контакты</h2>
+      <p>По вопросам, связанным с конфиденциальностью данных, свяжитесь с нами: <a href="/contacts">страница контактов</a> или <a href="https://t.me/edencorevpn" rel="noopener noreferrer" target="_blank">Telegram</a>.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <a href="/" class="footer-logo" aria-label="EdenCore VPN — главная">Eden<span class="accent">Core</span> VPN</a>
+    <nav aria-label="Навигация в подвале">
+      <ul class="footer-links">
+        <li><a href="/privacy">Политика конфиденциальности</a></li>
+        <li><a href="/terms">Условия использования</a></li>
+        <li><a href="/contacts">Контакты</a></li>
+        <li><a href="https://t.me/edencorevpn" rel="noopener noreferrer" target="_blank">Telegram</a></li>
+      </ul>
+    </nav>
+    <p class="footer-copy">© 2026 EdenCore VPN. Все права защищены.</p>
+  </div>
+</footer>
+
+</body>
+</html>
