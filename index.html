@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="ru" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>EdenCore VPN — Анонимный VPN на базе Xray Core | VLESS, Reality, No-Log</title>
+  <meta name="description" content="EdenCore VPN — надёжный анонимный VPN-сервис на базе Xray Core. Протоколы VLESS, VMess, Reality. 7 серверов в 6 странах, политика No-Log, обход блокировок. Попробуйте бесплатно.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="EdenCore VPN">
+  <link rel="canonical" href="https://edencore.vpn/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="EdenCore VPN">
+  <meta property="og:url" content="https://edencore.vpn/">
+  <meta property="og:title" content="EdenCore VPN — Xray Core. Свобода. Анонимность.">
+  <meta property="og:description" content="VPN на базе Xray Core с новейшими протоколами VLESS, VMess, Reality. 7 серверов в 6 странах, No-Log политика, обход любых блокировок.">
+  <meta property="og:image" content="https://edencore.vpn/og-image.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EdenCore VPN — Xray Core. Свобода. Анонимность.">
+  <meta name="twitter:description" content="VPN на базе Xray Core с VLESS, VMess, Reality. 7 серверов в 6 странах, No-Log политика.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://edencore.vpn/#organization",
+        "name": "EdenCore VPN",
+        "url": "https://edencore.vpn/",
+        "description": "Анонимный VPN-сервис на базе Xray Core с протоколами VLESS, VMess и Reality",
+        "sameAs": ["https://t.me/edencorevpn"]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "EdenCore VPN",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Android, iOS, Windows, macOS, Linux",
+        "offers": [
+          { "@type": "Offer", "name": "1 месяц", "price": "199", "priceCurrency": "RUB" },
+          { "@type": "Offer", "name": "3 месяца", "price": "537", "priceCurrency": "RUB" },
+          { "@type": "Offer", "name": "6 месяцев", "price": "990", "priceCurrency": "RUB" },
+          { "@type": "Offer", "name": "1 год", "price": "1800", "priceCurrency": "RUB" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Что такое Xray Core и чем он лучше обычного VPN?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Xray Core — это следующее поколение ядра прокси-протоколов с поддержкой VLESS, VMess и Reality. В отличие от классических VPN, Xray маскирует трафик под обычный HTTPS." }
+          },
+          {
+            "@type": "Question",
+            "name": "Хранит ли EdenCore VPN логи активности?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Нет. EdenCore VPN работает по строгой политике No-Log: мы не записываем историю браузинга, DNS-запросы, IP-адреса или метаданные соединений." }
+          },
+          {
+            "@type": "Question",
+            "name": "На каких устройствах работает EdenCore VPN?",
+            "acceptedAnswer": { "@type": "Answer", "text": "EdenCore VPN поддерживает Android, iOS, Windows, macOS и Linux. Вы можете подключить неограниченное количество устройств на одном аккаунте." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Self-hosted font via Google Fonts preconnect — swap to next/font in production -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green: #00a865;
+      --green-dim: rgba(0, 168, 101, 0.1);
+      --green-border: rgba(0, 168, 101, 0.2);
+      --blue: #0066dd;
+      --bg: #f7f8fa;
+      --bg-2: #eef0f4;
+      --surface: #ffffff;
+      --surface-2: #f0f2f6;
+      --border: rgba(0,0,0,0.08);
+      --border-hi: rgba(0,0,0,0.14);
+      --text: #0f1117;
+      --text-mid: rgba(15,17,23,0.62);
+      --text-muted: rgba(15,17,23,0.4);
+      --radius-card: 18px;
+      --radius-btn: 100px;
+      --nav-h: 64px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* BG radial mesh - fixed, pointer-events-none, no layout impact */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 45% at 15% 8%, rgba(0,168,101,0.06) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 38% at 85% 78%, rgba(0,102,221,0.05) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatShield {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+    @keyframes orbit {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    @keyframes pulseRing {
+      0%   { transform: scale(0.82); opacity: 0.5; }
+      70%  { transform: scale(1.18); opacity: 0; }
+      100% { transform: scale(0.82); opacity: 0; }
+    }
+    @keyframes blink {
+      0%,100% { opacity: 0.3; }
+      50%      { opacity: 1; }
+    }
+    @keyframes gradShift {
+      0%   { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes revealUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    section { position: relative; z-index: 1; }
+
+    /* ── NAV ── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(22px) saturate(160%);
+      -webkit-backdrop-filter: blur(22px) saturate(160%);
+      background: rgba(247,248,250,0.88);
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .nav-logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 19px;
+      font-weight: 800;
+      text-decoration: none;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      flex-shrink: 0;
+    }
+
+    .nav-logo .accent {
+      color: #00a865;
+      -webkit-text-fill-color: #00a865;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 400;
+      transition: color 0.18s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--green) !important;
+      color: #ffffff !important;
+      font-weight: 600 !important;
+      padding: 8px 20px;
+      border-radius: var(--radius-btn);
+      font-size: 13.5px !important;
+      transition: opacity 0.18s !important;
+    }
+
+    .nav-cta:hover { opacity: 0.82 !important; }
+
+    /* ── HERO — split layout, left text / right visual ── */
+    .hero {
+      padding-top: 80px;
+      padding-bottom: 70px;
+      min-height: calc(100dvh - var(--nav-h));
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 64px;
+      align-items: center;
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .hero-left { max-width: 560px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-dim);
+      border: 1px solid var(--green-border);
+      border-radius: var(--radius-btn);
+      padding: 5px 14px 5px 10px;
+      margin-bottom: 28px;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .badge-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 7px var(--green);
+      animation: blink 2.4s ease-in-out infinite;
+    }
+
+    .hero-badge-text {
+      font-size: 11px;
+      color: var(--green);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(38px, 4.5vw, 60px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.06;
+      margin-bottom: 22px;
+      animation: fadeUp 0.55s ease 0.08s both;
+    }
+
+    .grad-text {
+      color: var(--green);
+      -webkit-text-fill-color: var(--green);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--text-mid);
+      max-width: 480px;
+      margin-bottom: 36px;
+      line-height: 1.78;
+      font-weight: 300;
+      animation: fadeUp 0.55s ease 0.16s both;
+    }
+
+    .hero-sub strong { color: var(--text); font-weight: 500; }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.55s ease 0.24s both;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 13px 26px;
+      border-radius: var(--radius-btn);
+      text-decoration: none;
+      transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s;
+      box-shadow: 0 4px 18px rgba(0,168,101,0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,168,101,0.32);
+    }
+
+    .btn-primary:active { transform: translateY(0) scale(0.98); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 15px;
+      padding: 13px 26px;
+      border-radius: var(--radius-btn);
+      border: 1px solid var(--border-hi);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(0,0,0,0.22);
+      background: var(--surface-2);
+    }
+
+    .btn-secondary:active { transform: scale(0.98); }
+
+    /* ── HERO VISUAL ── */
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      animation: fadeUp 0.65s ease 0.32s both;
+    }
+
+    .shield-stage {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .orbit-ring {
+      position: absolute;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      border: 1px dashed rgba(0,168,101,0.22);
+      animation: orbit 22s linear infinite;
+    }
+
+    .orbit-dot {
+      position: absolute;
+      top: -5px; left: 50%;
+      transform: translateX(-50%);
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 10px var(--green);
+    }
+
+    .pulse-ring {
+      position: absolute;
+      width: 190px; height: 190px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0,168,101,0.22);
+    }
+
+    .pulse-ring-1 { animation: pulseRing 3s ease-out infinite; }
+    .pulse-ring-2 { animation: pulseRing 3s ease-out 1s infinite; }
+
+    .shield-icon { animation: floatShield 5.5s ease-in-out infinite; }
+
+    /* ── TRUST STRIP ── */
+    .trust-strip {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .trust-item {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 22px 16px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .trust-item:last-child { border-right: none; }
+
+    .trust-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .trust-label {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    /* ── SECTION SHARED ── */
+    .section-tag {
+      display: inline-block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(26px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .section-sub {
+      color: var(--text-mid);
+      font-size: 15.5px;
+      max-width: 520px;
+      line-height: 1.78;
+      font-weight: 300;
+    }
+
+    /* ── FEATURES — bento-style asymmetric grid ── */
+    .features-section { padding: 96px 0; }
+
+    .features-header {
+      margin-bottom: 56px;
+    }
+
+    /* Asymmetric bento: 2 large + 4 small */
+    .features-bento {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 14px;
+    }
+
+    .fcard {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 30px;
+      transition: border-color 0.22s, transform 0.22s cubic-bezier(0.16,1,0.3,1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .fcard:hover {
+      border-color: var(--green-border);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    /* Large card spans 2 cols */
+    .fcard--wide {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+      background: rgba(0,168,101,0.04);
+      border-color: var(--green-border);
+    }
+
+    .fcard--accent {
+      background: rgba(0,102,221,0.03);
+      border-color: rgba(0,102,221,0.14);
+    }
+
+    .fcard-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      background: var(--green-dim);
+      border: 1px solid var(--green-border);
+    }
+
+    .fcard-icon svg { display: block; }
+
+    .fcard-icon--blue {
+      background: rgba(0,102,221,0.08);
+      border-color: rgba(0,102,221,0.16);
+    }
+
+    .fcard h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 9px;
+      letter-spacing: -0.01em;
+    }
+
+    .fcard p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.72;
+      font-weight: 300;
+    }
+
+    .fcard--wide .fcard-body { display: flex; flex-direction: column; gap: 0; }
+
+    .fcard-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 120px;
+      border-radius: 12px;
+      background: rgba(0,168,101,0.06);
+      border: 1px solid var(--green-border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .traffic-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 60px;
+      padding: 0 12px;
+    }
+
+    .bar {
+      width: 10px;
+      border-radius: 4px 4px 0 0;
+      background: linear-gradient(180deg, var(--green), rgba(0,168,101,0.3));
+      transition: height 0.3s ease;
+    }
+
+    /* ── PROTOCOLS ── */
+    .protocols-section {
+      padding: 80px 0;
+      background: linear-gradient(180deg, transparent, rgba(0,168,101,0.03), transparent);
+    }
+
+    .protocols-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 52px;
+    }
+
+    .proto-card {
+      border: 1px solid var(--green-border);
+      border-radius: var(--radius-card);
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .proto-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--green);
+    }
+
+    .proto-card:hover { transform: translateY(-2px); }
+
+    .proto-badge {
+      display: inline-block;
+      background: var(--green-dim);
+      border: 1px solid var(--green-border);
+      color: var(--green);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .proto-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .proto-card p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.74;
+      font-weight: 300;
+    }
+
+    /* ── SERVERS ── */
+    .servers-section { padding: 80px 0; }
+
+    .servers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 10px;
+      margin-top: 52px;
+    }
+
+    .server-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 11px 14px;
+      font-size: 13px;
+      font-weight: 400;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      list-style: none;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .server-item:hover {
+      border-color: var(--green-border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    }
+
+    .server-flag { font-size: 18px; flex-shrink: 0; }
+
+    .server-name { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .server-ping {
+      font-size: 11px;
+      color: var(--green);
+      font-weight: 600;
+      flex-shrink: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* ── PRICING ── */
+    .pricing-section { padding: 96px 0; }
+
+    .pricing-header { margin-bottom: 56px; }
+
+    /* 4-column grid on desktop */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .pricing-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 32px 28px;
+      position: relative;
+      transition: transform 0.22s cubic-bezier(0.16,1,0.3,1), box-shadow 0.22s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.09);
+    }
+
+    .pricing-card.featured {
+      border-color: var(--green-border);
+      background: rgba(0,168,101,0.03);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--green);
+      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 14px;
+      border-radius: var(--radius-btn);
+      white-space: nowrap;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .plan-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .plan-price {
+      font-family: 'Outfit', sans-serif;
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .plan-price sup {
+      font-size: 18px;
+      font-weight: 600;
+      vertical-align: super;
+    }
+
+    .plan-period {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .plan-save {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--green);
+      background: var(--green-dim);
+      border: 1px solid var(--green-border);
+      border-radius: 6px;
+      padding: 2px 8px;
+      margin-bottom: 20px;
+    }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .plan-features li {
+      font-size: 13px;
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      line-height: 1.5;
+      color: var(--text-mid);
+    }
+
+    .plan-features li .check {
+      color: var(--green);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .plan-features li.off { color: var(--text-muted); }
+    .plan-features li.off .check { color: rgba(0,0,0,0.15); }
+
+    .btn-plan {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 12px;
+      border-radius: var(--radius-btn);
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-plan-primary {
+      background: var(--green);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(0,168,101,0.2);
+    }
+
+    .btn-plan-primary:hover {
+      box-shadow: 0 6px 22px rgba(0,168,101,0.32);
+      transform: translateY(-1px);
+    }
+
+    .btn-plan-primary:active { transform: scale(0.98); }
+
+    .btn-plan-outline {
+      border: 1px solid var(--border-hi);
+      color: var(--text);
+    }
+
+    .btn-plan-outline:hover {
+      border-color: var(--green-border);
+      background: var(--green-dim);
+    }
+
+    /* ── FAQ ── */
+    .faq-section { padding: 96px 0; }
+
+    .faq-list {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    details.faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    details.faq-item[open] {
+      border-color: var(--green-border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    }
+
+    summary {
+      padding: 20px 24px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14.5px;
+      font-weight: 700;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      user-select: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::after {
+      content: '+';
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--green);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    details[open] summary::after { transform: rotate(45deg); }
+
+    .faq-body {
+      padding: 0 24px 20px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      padding: 80px 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-card {
+      background: linear-gradient(135deg, rgba(0,168,101,0.06), rgba(0,102,221,0.04));
+      border: 1px solid var(--green-border);
+      border-radius: 28px;
+      padding: 72px 48px;
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 32px rgba(0,168,101,0.08);
+    }
+
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,168,101,0.07), transparent 68%);
+      pointer-events: none;
+    }
+
+    .cta-card h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(26px, 4.5vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .cta-card p {
+      color: var(--text-mid);
+      font-size: 15px;
+      margin-bottom: 36px;
+      font-weight: 300;
+      max-width: 440px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 44px 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      text-decoration: none;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .footer-logo .accent {
+      color: #00a865;
+      -webkit-text-fill-color: #00a865;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 22px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.18s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-copy {
+      color: var(--text-muted);
+      font-size: 12px;
+      width: 100%;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      padding-top: 22px;
+      margin-top: 8px;
+    }
+
+    /* ── SCROLL REVEAL (CSS-driven, no JS) ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 860px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center;
+      }
+      .hero-left { max-width: 100%; }
+      .hero-actions { justify-content: center; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .hero-visual { order: -1; }
+      .features-bento { grid-template-columns: 1fr; }
+      .fcard--wide { grid-column: span 1; grid-template-columns: 1fr; }
+      .protocols-grid { grid-template-columns: 1fr; }
+      .trust-strip { flex-wrap: wrap; }
+      .trust-item { border-right: none; border-bottom: 1px solid var(--border); flex: 0 0 50%; }
+      .trust-item:last-child { border-bottom: none; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero { padding-top: 52px; padding-bottom: 52px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .servers-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+      .cta-card { padding: 48px 24px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header" role="banner">
+  <nav class="site-nav" aria-label="Основная навигация">
+    <a href="/" class="nav-logo" aria-label="EdenCore VPN — главная">Eden<span class="accent">Core</span> VPN</a>
+    <ul class="nav-links">
+      <li><a href="#features">Возможности</a></li>
+      <li><a href="#protocols">Протоколы</a></li>
+      <li><a href="#servers">Серверы</a></li>
+      <li><a href="#pricing">Тарифы</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="https://apps.edencore-net.work" class="nav-cta">Попробовать бесплатно</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+<!-- ══ HERO — split screen ══ -->
+<section class="hero" aria-label="Главный экран">
+  <div class="hero-inner">
+
+    <div class="hero-left">
+      <div class="hero-badge" aria-hidden="true">
+        <div class="badge-dot"></div>
+        <span class="hero-badge-text">Соединение защищено</span>
+      </div>
+
+      <h1>
+        Свобода в сети.<br>
+        <span class="grad-text">Без следов.</span>
+      </h1>
+
+      <p class="hero-sub">
+        <strong>EdenCore VPN</strong> на базе <strong>Xray Core</strong> с протоколами
+        <strong>VLESS</strong>, <strong>VMess</strong> и <strong>Reality</strong>.
+        Обходите блокировки, скрывайте IP и оставайтесь анонимными.
+      </p>
+
+      <div class="hero-actions">
+        <a href="https://apps.edencore-net.work" class="btn-primary" aria-label="Начать бесплатный пробный период на 3 дня">
+          Начать бесплатно — 3 дня
+        </a>
+        <a href="#features" class="btn-secondary" aria-label="Узнать о возможностях">
+          Возможности
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="shield-stage">
+        <div class="orbit-ring">
+          <div class="orbit-dot"></div>
+        </div>
+        <div class="pulse-ring pulse-ring-1"></div>
+        <div class="pulse-ring pulse-ring-2"></div>
+        <svg class="shield-icon" width="128" height="148" viewBox="0 0 110 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sg" x1="0" y1="0" x2="110" y2="128" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#00a865"/>
+              <stop offset="100%" stop-color="#0066dd"/>
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3.5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <path d="M55 4L8 22V58C8 88 28 112 55 124C82 112 102 88 102 58V22L55 4Z" fill="url(#sg)" opacity="0.12" filter="url(#glow)"/>
+          <path d="M55 4L8 22V58C8 88 28 112 55 124C82 112 102 88 102 58V22L55 4Z" stroke="url(#sg)" stroke-width="2" fill="none" filter="url(#glow)"/>
+          <rect x="38" y="58" width="34" height="26" rx="5" fill="url(#sg)" opacity="0.88"/>
+          <path d="M44 58V50C44 43.4 66 43.4 66 50V58" stroke="url(#sg)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <circle cx="55" cy="71" r="4" fill="rgba(255,255,255,0.92)"/>
+          <rect x="53.5" y="71" width="3" height="6" rx="1.5" fill="rgba(255,255,255,0.92)"/>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ TRUST STRIP ══ -->
+<div class="trust-strip" aria-label="Ключевые показатели" role="region">
+  <div class="trust-item">
+    <span class="trust-value">No-Log</span>
+    <span class="trust-label">Без сохранения данных</span>
+  </div>
+  <div class="trust-item">
+    <span class="trust-value">7</span>
+    <span class="trust-label">Серверов в 6 странах</span>
+  </div>
+  <div class="trust-item">
+    <span class="trust-value">Xray Core</span>
+    <span class="trust-label">Следующее поколение</span>
+  </div>
+  <div class="trust-item">
+    <span class="trust-value">10 Гбит/с</span>
+    <span class="trust-label">Скорость серверов</span>
+  </div>
+  <div class="trust-item">
+    <span class="trust-value">Безлимит</span>
+    <span class="trust-label">Устройств на аккаунт</span>
+  </div>
+</div>
+
+<!-- ══ FEATURES — bento asymmetric ══ -->
+<section id="features" class="features-section" aria-labelledby="features-heading">
+  <div class="container">
+
+    <div class="features-header reveal">
+      <div class="section-tag">Возможности</div>
+      <h2 id="features-heading" class="section-title">Всё что нужно<br>для защиты в сети</h2>
+      <p class="section-sub">EdenCore создан для тех, кто ценит реальную приватность и скорость — без компромиссов.</p>
+    </div>
+
+    <div class="features-bento">
+
+      <!-- Wide card: No-Log + visual -->
+      <article class="fcard fcard--wide reveal">
+        <div class="fcard-body">
+          <div class="fcard-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00a865" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3>Политика No-Log</h3>
+          <p>Мы не записываем историю посещений, DNS-запросы, IP-адреса или метаданные. Ваша активность остаётся только вашей — технически и юридически.</p>
+        </div>
+        <div class="fcard-visual" aria-hidden="true">
+          <div class="traffic-bars">
+            <div class="bar" style="height:28px"></div>
+            <div class="bar" style="height:44px"></div>
+            <div class="bar" style="height:36px"></div>
+            <div class="bar" style="height:52px"></div>
+            <div class="bar" style="height:30px"></div>
+            <div class="bar" style="height:48px"></div>
+            <div class="bar" style="height:38px"></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Regular card -->
+      <article class="fcard fcard--accent reveal">
+        <div class="fcard-icon fcard-icon--blue">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0066dd" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <h3>Высокая скорость</h3>
+        <p>Xray Core обеспечивает минимальные накладные расходы и максимальную пропускную способность. Без ограничений трафика.</p>
+      </article>
+
+      <!-- Regular card -->
+      <article class="fcard reveal">
+        <div class="fcard-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00a865" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </div>
+        <h3>Обход блокировок</h3>
+        <p>Протокол Reality маскирует трафик под обычный HTTPS. DPI-системы не видят разницы — работает в самых строгих сетях.</p>
+      </article>
+
+      <!-- Regular card -->
+      <article class="fcard fcard--accent reveal">
+        <div class="fcard-icon fcard-icon--blue">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0066dd" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <h3>Шифрование AES-256</h3>
+        <p>ChaCha20 и современные алгоритмы обмена ключами защищают ваши данные на уровне государственных стандартов.</p>
+      </article>
+
+      <!-- Regular card -->
+      <article class="fcard reveal">
+        <div class="fcard-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00a865" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+            <line x1="12" y1="18" x2="12.01" y2="18"/>
+          </svg>
+        </div>
+        <h3>Все устройства</h3>
+        <p>Android, iOS, Windows, macOS, Linux. Без ограничений по устройствам на одном аккаунте.</p>
+      </article>
+
+      <!-- Regular card -->
+      <article class="fcard reveal">
+        <div class="fcard-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00a865" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3>Мгновенное подключение</h3>
+        <p>Автовыбор ближайшего сервера, Kill Switch и защита от утечки DNS — всё включается в один клик.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROTOCOLS ══ -->
+<section id="protocols" class="protocols-section" aria-labelledby="protocols-heading">
+  <div class="container">
+
+    <div class="reveal">
+      <h2 id="protocols-heading" class="section-title">Следующее поколение<br>VPN-протоколов</h2>
+      <p class="section-sub">EdenCore использует передовые протоколы Xray Core, невидимые для систем глубокой инспекции пакетов.</p>
+    </div>
+
+    <div class="protocols-grid">
+
+      <article class="proto-card reveal">
+        <div class="proto-badge">VLESS</div>
+        <h3>VLESS Protocol</h3>
+        <p>Упрощённый и быстрый преемник VMess. Минимальный заголовок, нулевые накладные расходы на уровне протокола. Вся нагрузка на TLS. Идеален для высокоскоростных соединений.</p>
+      </article>
+
+      <article class="proto-card reveal">
+        <div class="proto-badge">VMess</div>
+        <h3>VMess Protocol</h3>
+        <p>Оригинальный протокол V2Ray со встроенным шифрованием и аутентификацией. Надёжный и проверенный выбор с отличной совместимостью с большинством клиентов.</p>
+      </article>
+
+      <article class="proto-card reveal">
+        <div class="proto-badge">Reality</div>
+        <h3>VLESS + Reality</h3>
+        <p>Трафик неотличим от обращения к реальному HTTPS-сайту. Reality "заимствует" сертификат настоящего домена, полностью обходя DPI и SNI-блокировки.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVERS ══ -->
+<section id="servers" class="servers-section" aria-labelledby="servers-heading">
+  <div class="container">
+
+    <div class="reveal">
+      <div class="section-tag">Серверы</div>
+      <h2 id="servers-heading" class="section-title">7 серверов<br>в 6 странах</h2>
+      <p class="section-sub">Серверы в Европе, России и США. Все узлы оснащены каналами 1-10 Гбит/с.</p>
+    </div>
+
+    <ul class="servers-grid" aria-label="Список серверов">
+      <li class="server-item reveal"><span class="server-flag" aria-hidden="true">🇩🇪</span><span class="server-name">Германия #1</span><span class="server-ping">12 мс</span></li>
+      <li class="server-item reveal"><span class="server-flag" aria-hidden="true">🇩🇪</span><span class="server-name">Германия #2</span><span class="server-ping">14 мс</span></li>
+      <li class="server-item reveal"><span class="server-flag" aria-hidden="true">🇷🇺</span><span class="server-name">Россия</span><span class="server-ping">8 мс</span></li>
+      <li class="server-item reveal"><span class="server-flag" aria-hidden="true">🇫🇮</span><span class="server-name">Финляндия</span><span class="server-ping">18 мс</span></li>
+      <li class="server-item reveal"><span class="server-flag" aria-hidden="true">🇱🇻</span><span class="server-name">Латвия</span><span class="server-ping">16 мс</span></li>
+      <li class="server-item reveal"><span class="server-flag" aria-hidden="true">🇺🇸</span><span class="server-name">США</span><span class="server-ping">95 мс</span></li>
+      <li class="server-item reveal"><span class="server-flag" aria-hidden="true">🇳🇱</span><span class="server-name">Нидерланды</span><span class="server-ping">15 мс</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══ PRICING — 4 plans ══ -->
+<section id="pricing" class="pricing-section" aria-labelledby="pricing-heading">
+  <div class="container">
+
+    <div class="pricing-header reveal">
+      <div class="section-tag">Тарифы</div>
+      <h2 id="pricing-heading" class="section-title">Простые и честные цены</h2>
+      <p class="section-sub">Никаких скрытых платежей. Первые 3 дня бесплатно для всех новых пользователей.</p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- 1 месяц -->
+      <article class="pricing-card reveal">
+        <p class="plan-name">1 месяц</p>
+        <div class="plan-price"><sup>₽</sup>199</div>
+        <p class="plan-period">в месяц</p>
+        <ul class="plan-features">
+          <li><span class="check">&#10003;</span>Все 7 серверов</li>
+          <li><span class="check">&#10003;</span>Без ограничений</li>
+          <li><span class="check">&#10003;</span>VLESS + VMess + Reality</li>
+          <li><span class="check">&#10003;</span>No-Log политика</li>
+          <li><span class="check">&#10003;</span>Скорость до 1 Гбит/с</li>
+          <li class="off"><span class="check">&#10003;</span>Базовая поддержка</li>
+        </ul>
+        <a href="https://apps.edencore-net.work" class="btn-plan btn-plan-outline" aria-label="Подключить тариф на 1 месяц за 199 рублей">Подключить</a>
+      </article>
+
+      <!-- 3 месяца — featured -->
+      <article class="pricing-card featured reveal">
+        <div class="popular-badge">Популярный</div>
+        <p class="plan-name">3 месяца</p>
+        <div class="plan-price"><sup>₽</sup>537</div>
+        <p class="plan-period">179 ₽/мес при оплате за 3 мес.</p>
+        <div class="plan-save">Экономия 10%</div>
+        <ul class="plan-features">
+          <li><span class="check">&#10003;</span>Все 7 серверов</li>
+          <li><span class="check">&#10003;</span>Без ограничений</li>
+          <li><span class="check">&#10003;</span>VLESS + VMess + Reality</li>
+          <li><span class="check">&#10003;</span>No-Log политика</li>
+          <li><span class="check">&#10003;</span>Скорость до 1 Гбит/с</li>
+          <li><span class="check">&#10003;</span>Поддержка 24/7</li>
+        </ul>
+        <a href="https://apps.edencore-net.work" class="btn-plan btn-plan-primary" aria-label="Подключить тариф на 3 месяца за 537 рублей">Подключить</a>
+      </article>
+
+      <!-- 6 месяцев -->
+      <article class="pricing-card reveal">
+        <p class="plan-name">6 месяцев</p>
+        <div class="plan-price"><sup>₽</sup>990</div>
+        <p class="plan-period">165 ₽/мес при оплате за 6 мес.</p>
+        <div class="plan-save">Экономия 17%</div>
+        <ul class="plan-features">
+          <li><span class="check">&#10003;</span>Все 7 серверов</li>
+          <li><span class="check">&#10003;</span>Без ограничений</li>
+          <li><span class="check">&#10003;</span>VLESS + VMess + Reality + XTLS</li>
+          <li><span class="check">&#10003;</span>No-Log политика</li>
+          <li><span class="check">&#10003;</span>Скорость до 10 Гбит/с</li>
+          <li><span class="check">&#10003;</span>Приоритетная поддержка</li>
+        </ul>
+        <a href="https://apps.edencore-net.work" class="btn-plan btn-plan-outline" aria-label="Подключить тариф на 6 месяцев за 990 рублей">Подключить</a>
+      </article>
+
+      <!-- 1 год -->
+      <article class="pricing-card reveal">
+        <p class="plan-name">1 год</p>
+        <div class="plan-price"><sup>₽</sup>1800</div>
+        <p class="plan-period">150 ₽/мес при оплате за год</p>
+        <div class="plan-save">Экономия 25%</div>
+        <ul class="plan-features">
+          <li><span class="check">&#10003;</span>Все 7 серверов</li>
+          <li><span class="check">&#10003;</span>Без ограничений</li>
+          <li><span class="check">&#10003;</span>VLESS + VMess + Reality + XTLS</li>
+          <li><span class="check">&#10003;</span>No-Log политика</li>
+          <li><span class="check">&#10003;</span>Скорость до 10 Гбит/с</li>
+          <li><span class="check">&#10003;</span>Приоритетная поддержка 24/7</li>
+        </ul>
+        <a href="https://apps.edencore-net.work" class="btn-plan btn-plan-outline" aria-label="Подключить тариф на 1 год за 1800 рублей">Подключить</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section id="faq" class="faq-section" aria-labelledby="faq-heading">
+  <div class="container">
+
+    <div class="features-header reveal" style="text-align:center; max-width:600px; margin:0 auto 52px;">
+      <h2 id="faq-heading" class="section-title">Частые вопросы</h2>
+    </div>
+
+    <div class="faq-list">
+
+      <details class="faq-item reveal">
+        <summary>Что такое Xray Core и чем он лучше обычного VPN?</summary>
+        <div class="faq-body">
+          Xray Core — следующее поколение ядра прокси-протоколов с поддержкой VLESS, VMess и Reality. В отличие от классических VPN, Xray маскирует трафик под обычный HTTPS, что делает его практически невозможным для обнаружения DPI-системами. Скорость выше, надёжность лучше.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary>Хранит ли EdenCore VPN логи моей активности?</summary>
+        <div class="faq-body">
+          Нет. EdenCore VPN работает по строгой политике No-Log: мы не записываем историю браузинга, DNS-запросы, IP-адреса или метаданные соединений. Ваша конфиденциальность гарантирована технически и юридически.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary>На каких устройствах работает EdenCore VPN?</summary>
+        <div class="faq-body">
+          EdenCore VPN поддерживает Android, iOS, Windows, macOS и Linux. Подключайте неограниченное количество устройств на одном аккаунте. Настройка занимает менее 2 минут.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary>Какие сайты и сервисы можно разблокировать?</summary>
+        <div class="faq-body">
+          С EdenCore VPN вы получаете доступ к любым заблокированным ресурсам: Instagram, YouTube, зарубежным стриминговым платформам, мессенджерам и корпоративным сервисам. Протокол Reality особенно эффективен против современных DPI-систем — трафик неотличим от обычного HTTPS.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary>Есть ли бесплатный пробный период?</summary>
+        <div class="faq-body">
+          Да. Новые пользователи получают 3 дня бесплатного доступа без ограничений. Кредитная карта для регистрации пробного периода не требуется.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary>Что такое протокол Reality и почему он лучше других?</summary>
+        <div class="faq-body">
+          Reality — революционный протокол из семейства Xray. Он заимствует TLS-сертификат реального публичного домена, делая VPN-трафик неотличимым от обращения к легитимному сайту. Это полностью обходит SNI-блокировки и глубокую инспекцию пакетов, которую используют крупные провайдеры.
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section id="signup" class="cta-section" aria-labelledby="cta-heading">
+  <div class="cta-card">
+    <h2 id="cta-heading">Начните прямо сейчас.<br><span class="grad-text">3 дня бесплатно.</span></h2>
+    <p>Никакой кредитной карты. Отмена в любой момент. Мгновенная настройка.</p>
+    <div class="cta-actions">
+      <a href="https://apps.edencore-net.work" class="btn-primary" aria-label="Создать аккаунт EdenCore VPN бесплатно">
+        Создать аккаунт — бесплатно
+      </a>
+      <a href="/login" class="btn-secondary" aria-label="Войти в аккаунт EdenCore VPN">
+        Войти в аккаунт
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <a href="/" class="footer-logo" aria-label="EdenCore VPN — главная">Eden<span class="accent">Core</span> VPN</a>
+    <nav aria-label="Навигация в подвале">
+      <ul class="footer-links">
+        <li><a href="/privacy">Политика конфиденциальности</a></li>
+        <li><a href="/terms">Условия использования</a></li>
+        <li><a href="/contacts">Контакты</a></li>
+        <li><a href="https://t.me/edencorevpn" rel="noopener noreferrer" target="_blank">Telegram</a></li>
+      </ul>
+    </nav>
+    <p class="footer-copy">© 2025 EdenCore VPN. Все права защищены. Используйте VPN в соответствии с законодательством вашей страны.</p>
+  </div>
+</footer>
+
+<!-- Scroll reveal via IntersectionObserver — no window.scroll listener -->
+<script>
+  (function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var els = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function(el) { io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
